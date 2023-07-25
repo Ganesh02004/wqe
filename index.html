@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<html>
+<script src="https://www.gstatic.com/firebasejs/7.17.0/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    firebase.initializeApp({
+        apiKey: "AIzaSyDcWGVwxncZ_84qHWkhSnAWxIHrQItXSxY",
+        authDomain: "floood2004.firebaseapp.com",
+        databaseURL: "https://floood2004-default-rtdb.firebaseio.com",
+        projectId: "floood2004",
+        storageBucket: "floood2004.appspot.com",
+        messagingSenderId: "593794201641",
+        appId: "1:593794201641:web:69e2013905554e105ac438",
+        measurementId: "G-4PWS7FKKXJ"
+    });
+
+    // Create a reference to the auth object
+    const auth = firebase.auth();
+
+    // Handle the login button click event
+    function login() {
+        // Get the email and password from the user
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+
+        // Sign in the user
+        auth.signInWithEmailAndPassword(email, password).then(function () {
+            // The user is logged in
+            alert("You are logged in!");
+            window.location.href = "info.html";
+        }, function (error) {
+            // An error occurred
+            console.log("Error:", errorCode, errorMessage);
+            alert(error.message);
+        });
+    }
+</script>
+
+
+<head>
+    <title>Login Form</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #ffffffc4;
+            background-image: url("sea.jpg");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            opacity: 0.9;
+        }
+
+        .container {
+
+            border-radius: 6px;
+            position: absolute;
+            top: 200px;
+            left: 500px;
+            width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #cecece;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        .input-field {
+            width: 95%;
+            padding: 10px;
+
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .btn {
+            text-align: center;
+            background-color: #28a1ecfd;
+            color: #fff;
+            width: 30%;
+            padding: 10px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Login</h1>
+        <form action="/login" method="post">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="input-field" id="email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="input-field" id="password">
+            </div>
+            <center>
+                <button type="submit" onclick="login()" class="btn">Login</button>
+
+                <center>
+        </form>
+    </div>
+</body>
+
+</html>

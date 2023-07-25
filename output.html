@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Display Firebase Data in Table</title>
+    <script src="https://www.gstatic.com/firebasejs/7.17.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        firebase.initializeApp({
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            databaseURL: "https://YOUR_DATABASE_URL.firebaseio.com"
+        });
+
+        // Get a reference to the database
+        const db = firebase.database();
+
+        // Get the data from the database
+        const ref = db.ref("data");
+
+        // Create a table to display the data
+        const table = document.getElementById("table");
+
+        // Iterate over the data and add it to the table
+        ref.on("value", function (snapshot) {
+            table.innerHTML = "";
+            snapshot.forEach(function (child) {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+      <td>${child.key}</td>
+      <td>${child.val().adress}</td>
+      <td>${child.val().area}</td>
+      <td>${child.val().hour}</td>
+      <td>${child.val().mm}</td>
+      <td>${child.val().roadType}</td>
+      <td>${child.val().soilType}</td>
+    `;
+                table.appendChild(row);
+            });
+        });
+    </script>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        th {
+            background-color: #42868a;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <table id="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>AREA</th>
+                <th>DURATION</th>
+                <th>RAINFALL IN mm</th>
+                <th>ROADTYPE</th>
+                <th>SOILTYPE</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</body>
+
+</html>
